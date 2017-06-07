@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         MyRecyclerView rcv = (MyRecyclerView) findViewById(R.id.rcv);
         rcv.setLoadMoreEnable(true); // 默认是允许
-        rcv.setDelayMillis(1000); // 设置1000毫秒延迟
+        rcv.setDelayMillis(1000); // 加载更多时 设置1000毫秒延迟
         rcv.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         adapter = new BaseAdapter<>(list, this, R.layout.item_view);

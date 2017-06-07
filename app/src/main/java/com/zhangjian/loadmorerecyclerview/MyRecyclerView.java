@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -101,7 +100,7 @@ public class MyRecyclerView extends RecyclerView {
     }
 
     /**
-     * 延迟加载更多的时间
+     * 设置加载更多时 一个时间的延迟 避免闪太快
      *
      * @param delayMillis 以毫秒为单位
      */

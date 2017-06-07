@@ -6,7 +6,7 @@
 ![](https://github.com/orangeju0317/LoadMoreRecyclerview/blob/master/wiki/demoAnim.gif)
 
 ## 1. MyRecyclerView的使用
-com.orange.loadmorerecyclerview.MyRecyclerView是继承了系统 的Recyclerview，使其具有上拉加载的功能，这里对MyRecyclerview的方法作一些说明：
+MyRecyclerView是继承了系统的Recyclerview，使其具有上拉加载的功能，这里对MyRecyclerview的方法作一些说明：
 ```
 setLoadMoreEnable(boolean) 是否允许上拉加载
 setDelayMillis(long) 设置延迟加载的时间 单位为毫秒 默认是0ms
@@ -32,11 +32,39 @@ adapter.setBinder(new BaseAdapter.OnBindViewHolder() {
 这里`holder.setText(R.id.tv_item1, list.get(position));`，
 对于TextView，设置item_view的控件id和String或者R.string.strid均可，还有对ImageView的简单使用，如果holder的方法不满足需求，可以自行增加
 
+## 3. 具体使用示例：
+```
+MyRecyclerView rcv = (MyRecyclerView) findViewById(R.id.rcv);
+rcv.setLoadMoreEnable(true); // 默认是允许
+rcv.setDelayMillis(1000); // 加载更多时 设置1000毫秒延迟
+rcv.setLayoutManager(new LinearLayoutManager(this));
+ArrayList<String> list = new ArrayList<>();
+BaseAdapter adapter = new BaseAdapter<>(list, this, R.layout.item_view);
+adapter.setBinder(new BaseAdapter.OnBindViewHolder() {
+    @Override
+    public void bindView(BaseAdapter.ViewHolder holder, int position) {
+        holder.setText(R.id.tv_item1, list.get(position));
+    }
+});
+rcv.setAdapter(adapter);
+rcv.setOnLoadMoreListener(new MyRecyclerView.OnLoadMoreListener() {
+    @Override
+    public boolean onLoadBefore() {
+        return !refreshLayout.isRefreshing();
+    }
+
+    @Override
+    public void onLoadMore() {
+        setData();
+    }
+});
+```
+
 ## 注意事项
 1. 在app/build.gradle中需添加依赖：
 ```
 compile 'com.android.support:recyclerview-v7:25.3.1'
 compile 'com.pnikosis:materialish-progress:1.7'
 ```
-2. 使用时必须复制MyRecyclerView、BaseAdapter、res/layout/view_load_more.xml
+2. 使用时必须复制MyRecyclerView、BaseAdapter、res/layout/view_load_more.xml，可以自行进行扩展、修改加载样式
 3. MyRecyclerView设置adapter时必须为BaseAdapter
