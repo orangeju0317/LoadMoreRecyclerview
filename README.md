@@ -2,6 +2,7 @@
 封装了RecyclerView和RecyclerView的Adapter，使其具有上拉加载更多的功能，还接入了SwipeRefreshLayout，可以下拉刷新，并且不会冲突
 
 效果如下：
+
 ![](https://github.com/orangeju0317/LoadMoreRecyclerview/blob/master/wiki/demoAnim.gif)
 
 ## 1. MyRecyclerView的使用
